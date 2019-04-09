@@ -164,7 +164,7 @@ MonoBehaviour:
   - prefab: {fileID: 5001640457141013393, guid: fd29274e45994214cb17e295d97ee918,
       type: 3}
     balanceChance: 1
-  countRows: 2
+  countRows: 6
   minCountBricksInRow: 3
   maxCountBricksInRow: 6
 --- !u!1 &319008751
