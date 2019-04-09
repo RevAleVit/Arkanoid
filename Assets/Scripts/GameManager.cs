@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager instance;
+    public List<BrickController> bricksAtField;
+
+    private void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddBrick(BrickController brick)
     {
-        
+        bricksAtField.Add(brick);
+    }
+
+    public void DelBrick(BrickController brick)
+    {
+        bricksAtField.Remove(brick);
+
+        if (bricksAtField.Count <= 0)
+            GUIManager.instance.GameOver(true);
     }
 }

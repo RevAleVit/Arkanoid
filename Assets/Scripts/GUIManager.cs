@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class GUIManager : MonoBehaviour
 {
+    public static GUIManager instance;
+
+    [SerializeField] GameObject mainMenuUI;
+    [SerializeField] GameObject gameplayUI;
+    [SerializeField] GameObject pauseUI;
+    [SerializeField] GameObject gameOverUI;
+    [SerializeField] GameObject loseScreen;
+    [SerializeField] GameObject winScreen;
+
+    private void Awake()
+    {
+        instance = this;
+        Time.timeScale = 0;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +28,48 @@ public class GUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnApplicationPause(true);
+        }
+    }
+
+    public void OnApplicationPause(bool pause)
+    {
+        if(pause)
+        {
+            Time.timeScale = 0;
+            gameplayUI.SetActive(false);
+            pauseUI.SetActive(true);
+        }
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pauseUI.SetActive(false);
+        gameplayUI.SetActive(true);
+    }
+
+
+    public void Play()
+    {
+        Time.timeScale = 1;
+        mainMenuUI.SetActive(false);
+        gameplayUI.SetActive(true);
+    }
+
+    public void GameOver(bool isWin)
+    {
+        Time.timeScale = 0;
+        gameplayUI.SetActive(false);
+        gameOverUI.SetActive(true);
+        winScreen.SetActive(isWin);
+        loseScreen.SetActive(!isWin);
+    }
+
+    public void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 }

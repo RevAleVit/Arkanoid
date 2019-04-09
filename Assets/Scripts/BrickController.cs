@@ -19,13 +19,7 @@ public class BrickController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameManager.instance.AddBrick(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -38,7 +32,10 @@ public class BrickController : MonoBehaviour
         healthLeft -= damage;
 
         if (healthLeft <= 0)
+        {
             Destroy(gameObject);
+            GameManager.instance.DelBrick(this);
+        }
         else if (spriteRenderer)
             spriteRenderer.color -= new Color(0, 0, 0, 0.6f * ((float)healthLeft / (float)countHealth)); //Decrease value in alpha chanel for adding some transparent to brik
     }
