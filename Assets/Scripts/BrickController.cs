@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrikController : MonoBehaviour
+public class BrickController : MonoBehaviour
 {
     [SerializeField] private int countHealth = 1;
 
@@ -40,6 +40,6 @@ public class BrikController : MonoBehaviour
         if (healthLeft <= 0)
             Destroy(gameObject);
         else if (spriteRenderer)
-            spriteRenderer.color -= new Color(0, 0, 0, 0.8f * ((float)healthLeft / (float)countHealth)); //Decrease value in alpha chanel for adding some transparent to brik
+            spriteRenderer.color -= new Color(0, 0, 0, 0.6f * ((float)healthLeft / (float)countHealth)); //Decrease value in alpha chanel for adding some transparent to brik
     }
 }
