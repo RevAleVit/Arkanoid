@@ -21,7 +21,7 @@ public class BallController : MonoBehaviour
 
     void StartGame()
     {
-        rigid.velocity = new Vector2(5f * GetRandomSign(), -5f);
+        rigid.velocity = new Vector2(5f * GetRandomSign(), 5f);
         gameStarted = true;
     }
 
@@ -34,12 +34,12 @@ public class BallController : MonoBehaviour
         //Loopback protection
         if (Mathf.Abs(rigid.velocity.x) <= 0.2f)
         {
-            rigid.velocity = new Vector3(GetRandomSign(), rigid.velocity.y);
+            rigid.velocity = new Vector3(2f * GetRandomSign(), rigid.velocity.y);
         }
 
         if (Mathf.Abs(rigid.velocity.y) <= 0.2f)
         {
-            rigid.velocity = new Vector3(rigid.velocity.x, GetRandomSign());
+            rigid.velocity = new Vector3(rigid.velocity.x, 2f * GetRandomSign());
         }
     }
 
