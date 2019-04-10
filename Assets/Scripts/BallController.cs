@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    [Range(3, 7)]
+    [SerializeField] private float ballSpeed = 5;
+
     private Rigidbody2D rigid;
 
     private bool gameStarted = false;
@@ -21,7 +24,7 @@ public class BallController : MonoBehaviour
 
     void StartGame()
     {
-        rigid.velocity = new Vector2(5f * GetRandomSign(), 5f);
+        rigid.velocity = new Vector2(ballSpeed * GetRandomSign(), ballSpeed);
         gameStarted = true;
     }
 
