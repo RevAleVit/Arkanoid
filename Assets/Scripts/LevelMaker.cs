@@ -2,53 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-struct BrickType
-{
-    public BrickController prefab;
-    public int balanceChance;
-}
-
 public class LevelMaker : MonoBehaviour
 {
-    [SerializeField] BrickType[] brickTypes;
     private int[] balanceValues;
-
-    [Space]
-    [Range(1, 10)]
-    [SerializeField] private int countRows = 6;
-
-    [Space]
-    [Header("Count bricks in row range")]
-    [Range(1, 3)]
-    [SerializeField] private int minCountBricksInRow = 3;
-    [Range(3, 6)]
-    [SerializeField] private int maxCountBricksInRow = 6;    
 
     // Start is called before the first frame update
     void Start()
     {
-        balanceValues = new int[brickTypes.Length];
+        balanceValues = new int[GameSettings.instance.brickTypes.Length];
 
-        for(int i = 0; i < brickTypes.Length; i++)
-            balanceValues[i] = brickTypes[i].balanceChance;
+        for(int i = 0; i < GameSettings.instance.brickTypes.Length; i++)
+            balanceValues[i] = GameSettings.instance.brickTypes[i].balanceChance > 1 ? GameSettings.instance.brickTypes[i].balanceChance : 1;
 
         GenerateLevel();
     }
 
     void GenerateLevel()
     {
-        for (int i = 0; i < countRows; i++)
+        for (int i = 0; i < GameSettings.instance.countBrickRows; i++)
         {
-            int countBricksInCurrentRow = Random.Range(minCountBricksInRow, maxCountBricksInRow + 1);
+            //Random count of bricks in current row (from range)
+            int countBricksInCurrentRow = Random.Range(GameSettings.instance.minCountBricksInRow, GameSettings.instance.maxCountBricksInRow + 1);
 
             for (int j = 0; j < countBricksInCurrentRow; j++)
             {
+                //Calculate object position
                 float xPositionShift = (j - ((float)countBricksInCurrentRow / 2 - 1)) * 0.8f;
                 float xPositionCorrector = -0.4f;
 
-                Transform brick = Instantiate(brickTypes[GetBalanceNum(balanceValues)].prefab, transform).transform;
-                brick.localPosition = new Vector2(xPositionShift + xPositionCorrector, -i * 0.6f);                
+                //Get balanced index of brick
+                int balancedNum = GetBalanceNum(balanceValues);
+                if (GameSettings.instance.brickTypes[balancedNum].prefab != null)
+                {
+                    //Instantiate brick object
+                    BrickController brick = Instantiate(GameSettings.instance.brickTypes[balancedNum].prefab, transform);
+                    //Check for correct count health and set it to brick object
+                    brick.countHealth = GameSettings.instance.brickTypes[balancedNum].countHealth >= 1 ? GameSettings.instance.brickTypes[balancedNum].countHealth : 1;
+                    //Set brick position
+                    brick.transform.localPosition = new Vector2(xPositionShift + xPositionCorrector, -i * 0.6f);
+                }
+                else
+                    Debug.LogError("Brick type number[" + balancedNum + "] is empty!");
             }
         }
     }

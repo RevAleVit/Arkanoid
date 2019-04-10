@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4370158855192863257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4602473783202124588}
+  - component: {fileID: 4370158855192863258}
+  m_Layer: 0
+  m_Name: GameSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4602473783202124588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370158855192863257}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 64.01149, y: 286.3888, z: -4.3751597}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4370158855192863258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4370158855192863257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7979b294a277afd449e88ab4a5130a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batMoveSpeed: 0.15
+  ballSpeed: 5
+  bricksFallTime: 10
+  brickTypes:
+  - prefab: {fileID: 6864426595491494605, guid: 10a13915580e4d64fa21fdf4516dc0a1,
+      type: 3}
+    countHealth: 1
+    balanceChance: 5
+  - prefab: {fileID: 507159814461399128, guid: 5a0e1de35751d6c4bbfe5374c492ffc9, type: 3}
+    countHealth: 2
+    balanceChance: 3
+  - prefab: {fileID: 5001640457141013393, guid: fd29274e45994214cb17e295d97ee918,
+      type: 3}
+    countHealth: 3
+    balanceChance: 1
+  countBrickRows: 6
+  minCountBricksInRow: 3
+  maxCountBricksInRow: 6

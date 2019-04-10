@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BrickController : MonoBehaviour
 {
-    public int countHealth = 1;
+    [HideInInspector] public int countHealth = 1;
 
     private int healthLeft;
 
@@ -26,6 +26,8 @@ public class BrickController : MonoBehaviour
     {
         TakeDamage(1);
     }
+
+
 
     private void TakeDamage(int damage)
     {

@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BatController : MonoBehaviour
-{
-    [Range(0.05f, 0.3f)]
-    [SerializeField] private float moveSpeed = 0.2f;
-    
+{  
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -33,7 +30,7 @@ public class BatController : MonoBehaviour
             if ((axisValue < 0 && transform.position.x > -1.95f) ||
                 (axisValue > 0 && transform.position.x < 1.95))
                 //Move bat
-                transform.Translate(moveSpeed * axisValue, 0, 0);
+                transform.Translate(GameSettings.instance.batMoveSpeed * axisValue, 0, 0);
             else
                 //Set max translate position
                 transform.position = new Vector3(1.95f * Mathf.Sign(axisValue), transform.position.y, transform.position.z);

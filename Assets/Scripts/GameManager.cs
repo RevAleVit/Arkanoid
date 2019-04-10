@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public List<BrickController> bricksAtField;
-
-    [Range(1, 20)]
-    [SerializeField] private float bricksFallTime = 2;
+    public static GameManager instance;    
+    
     [SerializeField] private Transform bricksZone;
 
+    private List<BrickController> bricksAtField;
     private float bricksFallTimer;
     private int pointsCount = 0;
 
     private void Awake()
     {
         instance = this;
+        bricksAtField = new List<BrickController>();
     }
 
     private void Start()
     {
-        bricksFallTimer = bricksFallTime;        
+        bricksFallTimer = GameSettings.instance.bricksFallTime; 
     }
 
     private void Update()
@@ -37,7 +36,7 @@ public class GameManager : MonoBehaviour
     {
         //Start coroutine for smooth bricks falling (set fall distance in parameters)
         StartCoroutine(BricksFalling(bricksZone.position.y - 0.8f));
-        bricksFallTimer = bricksFallTime;
+        bricksFallTimer = GameSettings.instance.bricksFallTime;
     }
 
     IEnumerator BricksFalling(float targetPosition)
