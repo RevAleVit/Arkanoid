@@ -85,6 +85,13 @@ public class GUIManager : MonoBehaviour
         pointsText.text = pointsCount.ToString();
     }
 
+    public void RefreshTimer(float time)
+    {
+        //Check for timer < 0
+        time = time < 0 ? 0 : time;        
+        timerText.text = time.ToString("00.0");
+    }
+
     public void Restart()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");

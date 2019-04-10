@@ -6,9 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public List<BrickController> bricksAtField;
+
+    [Range(1, 20)]
     [SerializeField] private float bricksFallTime = 2;
     [SerializeField] private Transform bricksZone;
 
+    private float bricksFallTimer;
     private int pointsCount = 0;
 
     private void Awake()
@@ -18,13 +21,33 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Invoke("FallBricks", bricksFallTime +  1);
+        bricksFallTimer = bricksFallTime;        
+    }
+
+    private void Update()
+    {
+        //Bricks fall timer
+        bricksFallTimer -= Time.deltaTime;
+        GUIManager.instance.RefreshTimer(bricksFallTimer);
+        if (bricksFallTimer <= 0)
+            FallBricks();
     }
 
     private void FallBricks()
     {
-        bricksZone.position -= new Vector3(0, 0.8f, 0);
-        Invoke("FallBricks", bricksFallTime);
+        //Start coroutine for smooth bricks falling (set fall distance in parameters)
+        StartCoroutine(BricksFalling(bricksZone.position.y - 0.8f));
+        bricksFallTimer = bricksFallTime;
+    }
+
+    IEnumerator BricksFalling(float targetPosition)
+    {
+        //Falling bricks to target position
+        while (bricksZone.position.y > targetPosition)
+        {
+            bricksZone.position -= new Vector3(0, 0.05f, 0);
+            yield return new WaitForSeconds(0.03f);
+        }
     }
 
     public void AddBrick(BrickController brick)
@@ -42,7 +65,7 @@ public class GameManager : MonoBehaviour
         pointsCount += brick.countHealth;
         GUIManager.instance.RefreshPoints(pointsCount);
 
-        //Check for briks on the field
+        //Check for bricks on the field
         if (bricksAtField.Count <= 0)
             GUIManager.instance.GameOver(true);
     }    
