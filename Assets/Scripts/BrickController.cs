@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BrickController : MonoBehaviour
 {
-    [SerializeField] private int countHealth = 1;
+    public int countHealth = 1;
 
     private int healthLeft;
 
