@@ -38,9 +38,11 @@ public class GUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Call pause in gameplay when back button was pressed
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            OnApplicationPause(true);
+            if(gameplayUI.activeSelf)
+                OnApplicationPause(true);
         }
     }
 
