@@ -40,15 +40,14 @@ public class GUIManager : MonoBehaviour
     {
         //Call pause in gameplay when back button was pressed
         if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(gameplayUI.activeSelf)
-                OnApplicationPause(true);
+        {            
+            OnApplicationPause(true);
         }
     }
 
     public void OnApplicationPause(bool pause)
     {
-        if(pause)
+        if(pause && gameplayUI.activeSelf)
         {
             Time.timeScale = 0;
             gameplayUI.SetActive(false);
